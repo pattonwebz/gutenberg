@@ -12,6 +12,7 @@ export { join } from './join';
 export { registerFormatType } from './register-format-type';
 export { removeFormat } from './remove-format';
 export { remove } from './remove';
+export { removeEmptyLinks } from './remove-empty-links';
 export { replace } from './replace';
 export { insert } from './insert';
 export { insertObject } from './insert-object';

@@ -5,6 +5,7 @@ import { mergePair } from './concat';
 import { OBJECT_REPLACEMENT_CHARACTER, ZWNBSP } from './special-characters';
 import { toHTMLString } from './to-html-string';
 import { getTextContent } from './get-text-content';
+import { removeEmptyLinks } from './remove-empty-links';
 
 /** @typedef {import('./types').RichTextValue} RichTextValue */
 
@@ -270,11 +271,13 @@ export function create( {
 		return createEmptyValue();
 	}
 
-	return createFromElement( {
-		element,
-		range,
-		isEditableTree,
-	} );
+	return removeEmptyLinks(
+		createFromElement( {
+			element,
+			range,
+			isEditableTree,
+		} )
+	);
 }
 
 /**
