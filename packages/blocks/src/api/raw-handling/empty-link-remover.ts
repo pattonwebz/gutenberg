@@ -1,12 +1,17 @@
-import { isEmpty } from '@wordpress/dom';
+/**
+ * Whitespace characters treated as empty. Mirrors the rule in `@wordpress/dom`
+ * `isEmpty`, which excludes `\s` special spaces.
+ *
+ * @type {RegExp}
+ */
+const EMPTY_CHARS = /^[ \f\n\r\t\v\u00a0]*$/;
 
 /**
  * Removes empty link elements.
  *
  * A link is considered empty when it contains no text and no meaningful
- * children (e.g. images). The whitespace rule mirrors `@wordpress/dom`
- * `isEmpty`, which treats `\u00a0` and other form-feeding whitespace as
- * ignorable, so links wrapping only spaces/`&nbsp;`/`<br>` are removed.
+ * children (e.g. images). Links wrapping only ignorable whitespace (spaces,
+ * `&nbsp;`, `<br>`) are removed.
  *
  * @param node Node to check.
  */
@@ -27,7 +32,7 @@ export default function emptyLinkRemover( node: Node ): void {
 				return true;
 			}
 
-			return ! isEmpty( ( child as Text ).nodeValue );
+			return ! EMPTY_CHARS.test( ( child as Text ).nodeValue || '' );
 		}
 	);
 
