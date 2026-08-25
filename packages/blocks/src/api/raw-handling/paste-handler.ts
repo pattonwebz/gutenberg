@@ -25,6 +25,7 @@ import formatSpaceCorrector from './format-space-corrector';
 import brRemover from './br-remover';
 import { deepFilterHTML, isPlain, getBlockContentSchema } from './utils';
 import emptyParagraphRemover from './empty-paragraph-remover';
+import emptyLinkRemover from './empty-link-remover';
 import slackParagraphCorrector from './slack-paragraph-corrector';
 import isLatexMathMode from './latex-to-math';
 import { createBlock } from '../factory';
@@ -60,6 +61,7 @@ function filterInlineHTML( HTML: string ): string {
 		htmlFormattingRemover,
 		formatSpaceCorrector,
 		brRemover,
+		emptyLinkRemover,
 	] );
 
 	// Allows us to ask for this information when we get a report.
@@ -234,6 +236,7 @@ export function pasteHandler( {
 					formatSpaceCorrector,
 					brRemover,
 					emptyParagraphRemover,
+					emptyLinkRemover,
 				],
 				blockContentSchema
 			);
