@@ -6,6 +6,7 @@ import { create, RichTextData } from '../create';
 import { apply } from '../to-dom';
 import { toHTMLString } from '../to-html-string';
 import { removeFormat } from '../remove-format';
+import { removeEmptyLinks } from '../remove-empty-links';
 import { ownsSelection } from '../owns-selection';
 import { useDefaultStyle } from './use-default-style';
 import { useBoundaryStyle } from './use-boundary-style';
@@ -114,6 +115,7 @@ function useRichTextBase( {
 	 * @param {Object} newRecord The record to sync and apply.
 	 */
 	function handleChange( newRecord ) {
+		newRecord = removeEmptyLinks( newRecord );
 		recordRef.current = newRecord;
 		applyRecord( newRecord );
 
